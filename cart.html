@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bloomy – My Cart</title>
+  <link rel="stylesheet" href="shop.css">
+  <style>
+    .cart-container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border-bottom: 1px solid #ccc;
+      padding: 12px;
+      text-align: center;
+    }
+    .remove-btn {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .remove-btn:hover {
+      background: #c82333;
+    }
+    .total {
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-align: right;
+      margin-top: 10px;
+    }
+    .cart-actions {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .cart-actions button {
+      background: #40718f;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .cart-actions button:hover {
+      background: #305a70;
+    }
+  </style>
+</head>
+<body class="cart-page">
+  <header>
+    <div class="logo">🌸 Bloomy</div>
+    <nav class="navbar">
+      <a href="home.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="order.html">Place Order</a>
+      <a href="cart.html" class="active">My Cart</a>
+    </nav>
+  </header>
+
+  <div class="cart-container">
+    <h1>🛒 Your Cart</h1>
+    <table id="cartTable">
+      <thead>
+        <tr>
+          <th>Flower</th>
+          <th>Price (₹)</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div class="total" id="totalAmount">Total: ₹0</div>
+
+    <div class="cart-actions">
+      <button onclick="clearCart()">Clear Cart</button>
+      <button onclick="window.location.href='order.html'">Proceed to Order</button>
+    </div>
+  </div>
+
+  <footer>
+    <p><b>© 2025 Bloomy Flower Shop | All Rights Reserved</b></p>
+  </footer>
+
+  <script>
+    // Load cart from localStorage
+    function loadCart() {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      let tbody = document.querySelector('#cartTable tbody');
+      let total = 0;
+      tbody.innerHTML = '';
+
+      cart.forEach((item, index) => {
+        total += item.price;
+        tbody.innerHTML += `
+          <tr>
+            <td>${item.name}</td>
+            <td>₹${item.price}</td>
+            <td><button class="remove-btn" onclick="removeItem(${index})">Remove</button></td>
+          </tr>
+        `;
+      });
+
+      document.getElementById('totalAmount').textContent = 'Total: ₹' + total;
+    }
+
+    // Remove one item
+    function removeItem(index) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      loadCart();
+    }
+
+    // Clear entire cart
+    function clearCart() {
+      localStorage.removeItem('cart');
+      loadCart();
+    }
+
+    loadCart();
+  </script>
+</body>
+</html>

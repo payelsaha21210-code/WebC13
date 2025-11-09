@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bloomy – Place Order</title>
+  <link rel="stylesheet" href="shop.css">
+</head>
+<body class="order-page">
+  <header>
+    <div class="logo">🌸 Bloomy</div>
+    <nav class="navbar">
+      <a href="home.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="order.html" class="active">Place Order</a>
+       <a href="cart.html" class="active">My Cart</a>
+    </nav>
+  </header>
+
+  <section class="content">
+    <h1>Place Your Order</h1>
+    <form class="form">
+      <label><b>Full Name</b></label>
+      <input type="text" required>
+
+      <label><b>Address</b></label>
+      <textarea required></textarea>
+
+      <label><b>Phone Number</b></label>
+      <input type="text" required>
+
+      <label><b>Choose Flower</b></label>
+      <select required>
+        <option>Rose</option>
+        <option>Sunflower</option>
+        <option>Lily</option>
+        <option>Tulip</option>
+      </select>
+
+      <button type="submit">Submit Order</button>
+    </form>
+  </section>
+
+  <footer>
+    <p><b>© 2025 Bloomy Flower Shop | All Rights Reserved</b></p>
+  </footer>
+  <script>
+document.addEventListener("DOMContentLoaded", function() {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  const formSection = document.querySelector('.content');
+
+  if (cart.length === 0) {
+    const emptyMsg = document.createElement('div');
+    emptyMsg.innerHTML = `<h2>Your cart is empty 🛒</h2>`;
+    formSection.prepend(emptyMsg);
+    return;
+  }
+
+  // total হিসাব
+  let total = cart.reduce((sum, item) => sum + item.price, 0);
+
+  // summary section
+  const summary = document.createElement('div');
+  summary.classList.add('cart-summary');
+  summary.innerHTML = `
+    <h2>Your Cart Summary</h2>
+    <ul>
+      ${cart.map(item => `<li>${item.name} – ₹${item.price}</li>`).join('')}
+    </ul>
+    <h3>Total: ₹${total}</h3>
+    <hr>
+  `;
+  formSection.prepend(summary);
+});
+</script>
+</body>
+</html>

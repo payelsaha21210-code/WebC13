@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bloomy – Home</title>
+  <link rel="stylesheet" href="shop.css">
+</head>
+</script>
+<body>
+  <header>
+    <div class="logo">🌸 Bloomy</div>
+    <nav class="navbar">
+       <a href="home.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="order.html">Place Order</a>
+      <a href="cart.html" class="active">My Cart</a>
+    </nav>
+  </header>
+  <section class="hero">
+    <h1>Welcome to Bloomy</h1>
+    <p>Beautiful flowers for every occasion</p>
+  </section>
+  <section class="products">
+    <h2>Our Flowers</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="https://i.pinimg.com/236x/5d/b1/fd/5db1fd2f28f19678251d3baea24703b6.jpg" alt="Rose">
+        <h3>Rose</h3>
+        <button type="button" onclick="addToCart('Rose',50)">Price ₹50</button>
+      </div>
+      <div class="product-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxk5DSIP_0IKdpFUwlqx9vML8K1NlZSmfv3g&s" alt="Sunflower">
+        <h3>Sunflower</h3>
+        <button type="button" onclick="addToCart('Sunflower',40)">Price ₹40</button>
+      </div>
+      <div class="product-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAqWsp6ZA_uM5xWcShBVqchnCxnizjNH-dVA&s"alt="lily">
+        <h3>Lily</h3>
+         <button type="button" onclick="addToCart('Lily',50)">Price ₹50</button>
+      </div>
+      <div class="product-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGw9s90Gi3DlAlkGsFcDR7d9nFYq4izKRiAw&s" alt="Dalia">
+        <h3>Dalia</h3>
+        <button type="button" onclick="addToCart('Dalia',40)">Price ₹40</button>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <p>© 2025 Bloomy Flower Shop | All Rights Reserved</p>
+  </footer>
+  <script>
+function addToCart(name, price) {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  cart.push({ name, price });
+  localStorage.setItem('cart', JSON.stringify(cart));
+  alert(name + " added to cart!");
+}
+</script>
+</body>
+</html>
